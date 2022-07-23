@@ -18,4 +18,4 @@ Execute run start script with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create
 yarn run start
 ```
 
-Or use the pages hosted on Github Pages.
+Or use the page hosted on Github Pages.
