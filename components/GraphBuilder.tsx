@@ -2,35 +2,37 @@ import React from 'react'
 import "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
-function GraphBuilder() {
+const GraphBuilder = ({label, result0, result}: {label: number[], result0: number[], result: number[]}) => {
 
-  const labels = [
-    "step1",
-    "step2",
-    "step3",
-    "step4",
-    "step5",
-    "step6",
-  ]
   const data = {
-    labels: labels,
+    labels: label,
     datasets: [
       {
-        label: "data",
-        data: [40, 60, 70, 100, 50, 80],
+        label: "前進オイラー法",
+        data: result,
         borderColor: "rgb(245, 154, 35)",
       },
-    ],
+      {
+        label: "data",
+        data: result0,
+        borderColor: "rgb(126, 198, 54)",
+      }],
+      
   }
   
   const options: {} = {
+    elements: {
+      point: {
+        radius: 0
+      }
+    },
     maintainAspectRatio: false,
     responsive: false,
   }
 
 
   return (
-    <div className='flex justify-center px-10 py-4 md:py-10'>
+    <div>
       <Line height={300} width={400} data={data} options={options} />
     </div>
   )
