@@ -13,7 +13,6 @@ export const calculate = (functionId: number, h: number, xmax: number) => {
     if (x >= ddx - EPS) {
       ddx += dx
       result.push(y)
-      console.log(y)
     }
 
     y += h * getFunction(functionId, x)
