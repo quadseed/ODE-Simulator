@@ -1,9 +1,9 @@
 import React, { useRef, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import { elulerState } from '../atoms/resultState'
+import { eulerState } from '../atoms/resultState'
 import { rungeKuttaState } from '../atoms/resultState'
-import { calculate as ElulerCalculate} from '../utils/ForwardEluler'
+import { calculate as EulerCalculate} from '../utils/ForwardEuler'
 import { calculate as RungeKuttaCalculate }  from '../utils/RungeKutta'
 import { labelState } from '../atoms/labelState'
 
@@ -17,9 +17,9 @@ const Controller = () => {
 
   const setGraphLabel = useSetRecoilState<number[]>(labelState)
 
-  const setElulerResult = useSetRecoilState<number[]>(elulerState)
+  const setEulerResult = useSetRecoilState<number[]>(eulerState)
   const setRungeKuttaResult = useSetRecoilState<number[]>(rungeKuttaState)
-  
+
   const checkInput = () => {
     const h = hRef.current?.value
     const xmax = xmaxRef.current?.value
@@ -42,7 +42,7 @@ const Controller = () => {
   const execute = (selectId: number, h: number, xmax: number) => {
     setGraphLabel([...Array(xmax+1)].map((v, i)=> i))
 
-    setElulerResult(ElulerCalculate(selectId, h, xmax))
+    setEulerResult(EulerCalculate(selectId, h, xmax))
     setRungeKuttaResult(RungeKuttaCalculate(selectId, h, xmax))
   }
 

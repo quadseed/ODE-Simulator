@@ -2,19 +2,19 @@ import React from 'react'
 import "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
-const GraphBuilder = ({label, result0, result}: {label: number[], result0: number[], result: number[]}) => {
+const GraphBuilder = ({xlabel, eulerResult, rungeKuttaResult}: {xlabel: number[], eulerResult: number[], rungeKuttaResult: number[]}) => {
 
   const data = {
-    labels: label,
+    labels: xlabel,
     datasets: [
       {
-        label: "前進オイラー法",
-        data: result,
+        label: '前進オイラー法',
+        data: eulerResult,
         borderColor: "rgb(245, 154, 35)",
       },
       {
-        label: "data",
-        data: result0,
+        label: 'ルンゲ・クッタ法',
+        data: rungeKuttaResult,
         borderColor: "rgb(126, 198, 54)",
       }],
       
@@ -26,13 +26,18 @@ const GraphBuilder = ({label, result0, result}: {label: number[], result0: numbe
         radius: 0
       }
     },
-    maintainAspectRatio: false,
-    responsive: false,
+    plugins: {
+      legend: {
+        position: 'bottom'
+      },
+    },
+    maintainAspectRatio: true,
+    responsive: true,
   }
 
 
   return (
-    <div>
+    <div className='flex justify-center'>
       <Line height={300} width={400} data={data} options={options} />
     </div>
   )

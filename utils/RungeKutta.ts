@@ -1,4 +1,4 @@
-import getFunction from "./FunctionSelector"
+import { getDiffrentialFunction } from "./FunctionSelector"
 
 export const calculate = (functionId: number, h: number, xmax: number) => {
   const result: number[] = []
@@ -15,10 +15,10 @@ export const calculate = (functionId: number, h: number, xmax: number) => {
       result.push(y)
     }
 
-    const k1 = getFunction(functionId, x)
-    const k2 = getFunction(functionId, x + h / 2.0)
-    const k3 = getFunction(functionId, x + h / 2.0)
-    const k4 = getFunction(functionId, x + h)
+    const k1 = getDiffrentialFunction(functionId, x)
+    const k2 = getDiffrentialFunction(functionId, x + h / 2.0)
+    const k3 = getDiffrentialFunction(functionId, x + h / 2.0)
+    const k4 = getDiffrentialFunction(functionId, x + h)
 
     y += (h / 6.0) * (k1 + 2.0*k2 + 2.0*k3 + k4)
     x += h
