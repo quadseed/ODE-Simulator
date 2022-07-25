@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/outline'
 import { elulerState } from '../atoms/resultState'
 import { rungeKuttaState } from '../atoms/resultState'
 import { calculate as ElulerCalculate} from '../utils/ForwardEluler'
-import { calculate as RungeKuttaCalculate }  from '../utils/Runge-Kutta'
+import { calculate as RungeKuttaCalculate }  from '../utils/RungeKutta'
 import { labelState } from '../atoms/labelState'
 
 const Controller = () => {
