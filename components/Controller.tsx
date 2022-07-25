@@ -103,6 +103,11 @@ const Controller = () => {
                         const h = Number(hRef.current?.value)
                         const xmax = Number(xmaxRef.current?.value)
 
+                        if (h < 0.0001) {
+                          alert("刻み幅hは0.0001以上の値にしてください")
+                          return
+                        }
+
                         if (1000 < xmax) {
                           alert("計算範囲は1000以下の値にしてください")
                           return
