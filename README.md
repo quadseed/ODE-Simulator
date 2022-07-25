@@ -18,4 +18,4 @@ Execute run start script with [Yarn](https://yarnpkg.com/lang/en/docs/cli/create
 yarn run start
 ```
 
-Or use the page hosted on Github Pages.
+Or use this [page](https://ode.quadseed.net/) hosted on Github Pages.
