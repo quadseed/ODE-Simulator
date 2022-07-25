@@ -2,19 +2,19 @@ import React from 'react'
 import "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
-const GraphBuilder = ({xlabel, eulerResult, rungeKuttaResult}: {xlabel: number[], eulerResult: number[], rungeKuttaResult: number[]}) => {
+const GraphBuilder = ({xlabel, labelName, result, sample}: {xlabel: number[], labelName: string, result: number[], sample: number[]}) => {
 
   const data = {
     labels: xlabel,
     datasets: [
       {
-        label: '前進オイラー法',
-        data: eulerResult,
+        label: labelName,
+        data: result,
         borderColor: "rgb(245, 154, 35)",
       },
       {
-        label: 'ルンゲ・クッタ法',
-        data: rungeKuttaResult,
+        label: '関数',
+        data: sample,
         borderColor: "rgb(126, 198, 54)",
       }],
       

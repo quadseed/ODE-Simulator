@@ -5,7 +5,8 @@ import { eulerState } from '../atoms/resultState'
 import { rungeKuttaState } from '../atoms/resultState'
 import { calculate as EulerCalculate} from '../utils/ForwardEuler'
 import { calculate as RungeKuttaCalculate }  from '../utils/RungeKutta'
-import { labelState } from '../atoms/labelState'
+import { functionState, labelState } from '../atoms/labelState'
+import { getFunction } from '../utils/FunctionSelector'
 
 const Controller = () => {
 
@@ -13,12 +14,14 @@ const Controller = () => {
   const xmaxRef = useRef<HTMLInputElement>(null)
 
   const [select, setSelect] = useState(1)
-  const [label, setLabel] = useState("関数")
+  const [label, setLabel] = useState("微分関数1")
 
   const setGraphLabel = useSetRecoilState<number[]>(labelState)
 
   const setEulerResult = useSetRecoilState<number[]>(eulerState)
   const setRungeKuttaResult = useSetRecoilState<number[]>(rungeKuttaState)
+
+  const setFunctionState = useSetRecoilState<number[]>(functionState)
 
   const checkInput = () => {
     const h = hRef.current?.value
@@ -42,6 +45,14 @@ const Controller = () => {
   const execute = (selectId: number, h: number, xmax: number) => {
     setGraphLabel([...Array(xmax+1)].map((v, i)=> i))
 
+    const result = []
+
+    for (let i = 0; i < xmax+1; i++) {
+      result.push(getFunction(select, i))
+    }
+
+    setFunctionState(result)
+
     setEulerResult(EulerCalculate(selectId, h, xmax))
     setRungeKuttaResult(RungeKuttaCalculate(selectId, h, xmax))
   }
@@ -52,17 +63,17 @@ const Controller = () => {
           <div className='space-y-4'>
             <div className='flex items-center space-x-3'>
               <p>刻み幅 h</p>
-              <input type='text' ref={hRef} defaultValue={0.1} className='input input-sm input-bordered input-info max-w-xs'></input>
+              <input type='text' ref={hRef} defaultValue={1} className='input input-sm input-bordered input-info max-w-xs'></input>
             </div>
             <div className='flex items-center space-x-2'>
               <p>計算範囲</p>
-              <input type='text' ref={xmaxRef} defaultValue={1000} className='input input-sm input-bordered input-info max-w-xs'></input>
+              <input type='text' ref={xmaxRef} defaultValue={100} className='input input-sm input-bordered input-info max-w-xs'></input>
             </div>
           </div>
           
           
           <div className='space-x-3 space-y-4'>
-            <div className='dropdown w-28 h-10'>
+            <div className='dropdown w-36 h-10'>
               <label tabIndex={0} className="btn m-1 flex items-center space-x-2 group text-indigo-600 hover:text-white bg-white hover:bg-indigo-600">
                 <p>{label}</p>
                 <ChevronDownIcon className='w-5 h-5 text-indigo-600 group-hover:text-white' />
@@ -72,17 +83,18 @@ const Controller = () => {
                 <li className='flex items-center'
                     onClick={() => {
                       setSelect(1)
-                      setLabel("関数1")
+                      setLabel("微分関数1")
                     }}>
 
-                <img src="/m1.png" alt="m1" className='p-3' />
+                <img src="/df1.png" alt="df1" className='p-3' />
               </li>
               <li className=''
                     onClick={() => {
                       setSelect(2)
-                      setLabel("関数2")
+                      setLabel("微分関数2")
                     }}>
-                  <a>Item 2</a></li>
+                  <img src="/df2.png" alt="df2" className='p-3' />
+              </li>
               </ul>
             </div>
             <button className='btn btn-primary' 
