@@ -2,7 +2,14 @@ import React from 'react'
 import "chart.js/auto"
 import { Line } from "react-chartjs-2"
 
-const GraphBuilder = ({xlabel, labelName, result, sample}: {xlabel: number[], labelName: string, result: number[], sample: number[]}) => {
+type GraphBuilderProps = {
+  xlabel: number[],
+  labelName: string,
+  result: number[],
+  sample: number[]
+}
+
+const GraphBuilder = ({xlabel, labelName, result, sample}: GraphBuilderProps) => {
 
   const data = {
     labels: xlabel,
